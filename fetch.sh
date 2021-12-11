@@ -33,6 +33,18 @@ get_shell () {
 	if [ "$shell_" = "bash" ]
 	then
 		shell_="bash $(bash --version | head -1 | cut -d ' ' -f 4 | cut -d '(' -f 1)"
+	elif [ "$shell_" = "tcsh" ]
+	then
+		shell_="tcsh $(tcsh --version | cut -d ' ' -f 2)"
+	elif [ "$shell_" = "zsh" ]
+	then
+		shell_="zsh $(zsh --version | cut -d ' ' -f 2)"
+	elif [ "$shell_" = "ksh" ]
+	then
+		shell_="ksh $(strings /bin/ksh | grep Version | tail -2  | cut -d ' ' -f2-)"
+	elif [ "$shell_" = "fish" ]
+	then
+		shell_="$(fish --version)"
 	fi
 }
 
@@ -45,13 +57,8 @@ get_de () {
 	de_ver="$(plasmashell --version | awk '{print $2}')"
 }
 
-get_gpu () {
-	cpu_="$(cat /proc/cpuinfo | grep 'model name' | head -1 | cut -d':' -f 2 | xargs)"
-}
-
 get_cpu () {
-	gpu_="$(lspci | grep VGA | cut -d '[' -f 3)"
-	gpu_="$(lspci -vnn | grep VGA -A 12 | grep Subsystem | cut -f 2 | cut -d ']' -f 1 | cut -d ' ' -f2-)]"
+	cpu_="$(cat /proc/cpuinfo | grep 'model name' | head -1 | cut -d':' -f 2 | xargs)"
 }
 
 get_memory () {
@@ -69,7 +76,6 @@ get_packages
 get_shell
 get_resolution
 get_de
-get_gpu
 get_cpu
 get_memory
 
@@ -88,8 +94,8 @@ $red #        #       .   #. 		$blue Shell: $white$shell_
 $red ##       .#,       ##   		$blue Resolution: $white$screen_res
 $red (#          (,/(*       		$blue Desktop Environment: $white$de_ $de_ver
 $red  ###                    		$blue CPU: $white$cpu_
-$red    ##                   		$blue GPU: $white$gpu_
-$red      ##                 		$blue Memory: $white$total_memory
+$red    ##                   		$blue Memory: $white$total_memory
+$red      ##                 		
 $red         ,#*             
 $white
 		\n"
