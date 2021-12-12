@@ -81,8 +81,9 @@ get_memory
 
 
 main () {
-	if [[ $(hostname) == "debian" ]];
-	then
+		#distro_="arch"
+        case $distro_ in
+         ([Dd]ebian*)
 printf \
 "$red           ..          			$blue $name
 $red       ##############    		$green ################
@@ -99,7 +100,28 @@ $red      ##
 $red         ,#*             
 $white
 		\n"
-	fi
-}
+;;
+          ([Aa]rch*)
+printf \
+"$blue               Mdm					$red $name
+$blue              MmssN					$green ################
+$blue             MNssssN					$red Operating System: $white$distro_
+$blue            MNsoooosN					$red Kernel: $white$kernel_version
+$blue           MNdsooooosM					$red Uptime: $white${uptime_:3}
+$blue          MNs+ssooooosM					$red Packages: $white $pk_num
+$blue         MNo+++++++ooosM				$red Shell: $white$shell_
+$blue        MNo++ooossssssosM				$red Resolution: $white$screen_res
+$blue       MNsossssshyssssssyN				$red Desktop Environment: $white$de_ $de_ver
+$blue      MNssssssd    hsssssyN				$red CPU: $white$cpu_
+$blue     MNssssssy      ssssssyN				$red Memory: $white$total_memory
+$blue    Mmsssssssh      yssssyhdM
+$blue   Mmsssssyhdm      mdhyssssyN
+$blue  Mdsshd                  dhssm
+$blue mdN                         NdN
 
+		\n"
+;;
+
+esac
+}
 main
