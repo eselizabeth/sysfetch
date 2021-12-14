@@ -4,7 +4,9 @@ green='\033[32m'
 white='\033[37m'
 blue='\033[34m'
 red='\033[31m'
-yellow='\033[33m'
+orange='\033[33m'
+purple='\033[35m'
+yellow='\033[93m'
 get_name () {
 	name="$(whoami)@$(hostname)"
 }
@@ -81,7 +83,7 @@ get_memory
 
 
 main () {
-		distro_="ubuntu"
+		distro_="gentoo"
         case $distro_ in
          ([Dd]ebian*)
 printf \
@@ -147,29 +149,120 @@ $white
 		([Uu]buntu*)
 
 printf \
-"$yellow                          $white hsoosd 			$red $name
-               $yellow  mmddhdmM$white yooooood 			$green ################
-               $yellow soooooooM$white hoooooom 			$red Operating System: $white$distro_
-          $yellow dsyMMNsoooooosm$white dyyyhm 			$red Kernel: $white$kernel_version
-         $yellow msoooyNMNsooooooosyhhyssd 			$red Uptime: $white${uptime_:3}
-        $yellow doooooosNMNddmmdysooooooooh 			$red Packages: $white $pk_num
+"$orange                          $white hsoosd 			$red $name
+               $orange  mmddhdmM$white yooooood 			$green ################
+               $orange soooooooM$white hoooooom 			$red Operating System: $white$distro_
+          $orange dsyMMNsoooooosm$white dyyyhm 			$red Kernel: $white$kernel_version
+         $orange msoooyNMNsooooooosyhhyssd 			$red Uptime: $white${uptime_:3}
+        $orange doooooosNMNddmmdysooooooooh 			$red Packages: $white $pk_num
         ooooooosm         msoooooood			$red Shell: $white$shell_
-  $red hsssymmooooos$yellow            soooooos			$red Resolution: $white$screen_res
- $red yoooooomdooood$yellow              mmmmmmm			$red Desktop Environment: $white$de_ $de_ver
- $red yoooooommooood$yellow              mmmmmmm			$red CPU: $white$cpu_
-  $red hsssymmsoooos$yellow            soooooos			$red Memory: $white$total_memory
+  $red hsssymmooooos$orange            soooooos			$red Resolution: $white$screen_res
+ $red yoooooomdooood$orange              mmmmmmm			$red Desktop Environment: $white$de_ $de_ver
+ $red yoooooommooood$orange              mmmmmmm			$red CPU: $white$cpu_
+  $red hsssymmsoooos$orange            soooooos			$red Memory: $white$total_memory
         ooooooosm         msoooooood
         doooooosNMMdmmmdhsooooooooh 
          msooosNMNsooooooosyhhyssd 
            hsyMMNsoooooo$white dyyyhmM 
-                $yellow sooooooo$white hoooooom 
-                 $yellow mddhhhm$white yooooood 
+                $orange sooooooo$white hoooooom 
+                 $orange mddhhhm$white yooooood 
                           $white hooosd 
 		\n"
 ;;
+	([Mm]anjaro*)
+printf \
+"
+$green  ===================. .========		$red $name
+$green  ===================. .========		$green ################
+$green  ===================. .========		$red Operating System: $white$distro_
+$green  ===================. .========		$red Kernel: $white$kernel_version
+$green  ========:            .========		$red Uptime: $white${uptime_:3}
+$green  ========.  ::::::::  .========		$red Packages: $white $pk_num
+$green  ========.  ========. .========		$red Shell: $white$shell_
+$green  ========.  ========. .========		$red Resolution: $white$screen_res
+$green  ========.  ========. .========		$red Desktop Environment: $white$de_ $de_ver
+$green  ========.  ========. .========		$red CPU: $white$cpu_
+$green  ========.  ========. .========		$red Memory: $white$total_memory
+$green  ========.  ========. .========
+$green  ========.  ========. .========
+$green  ========.  ========. .========
+$white
+		\n"
+;;
 
+	([Ff]edora*)
+printf \
+"
+$blue            .-:://///::-.           
+$blue         :/+++++++++++++++/:.      		$red $name
+$blue      -/+++++++++++++++++++++/-			$green ################
+$blue    ./++++++++++++++/:::/+++++++.   		$red Operating System: $white$distro_
+$blue   -+++++++++++++/.$white######$blue:++++++-  		$red Kernel: $white$kernel_version 
+$blue  -+++++++++++++/$white###$blue/++/.$white##$blue:++++++- 		$red Uptime: $white${uptime_:3}
+$blue  ++++++++++++++:$white##$blue-++++/$white##$blue-+++++++ 		$red Packages: $white $pk_num
+$blue -++++++++++++++:$white##$blue-+++$white##$blue//++++++++-		$red Shell: $white$shell_
+$blue :++++++++:-...::$white#####$blue/+++++++++++:		$red Resolution: $white$screen_res
+$blue :++++++.$white###..::$white###$blue.../+++++++++++:			$red Desktop Environment: $white$de_ $de_ver
+$blue :+++++$white##$blue:+++++:$white##$blue-+++++++++++++++		$red CPU: $white$cpu_
+$blue :++++/$white##$blue.++++++:$white##$blue-++++++++++++++: 		$red Memory: $white$total_memory
+$blue :+++++.$white##$blue-++++:$white###$blue/+++++++++++++:  
+$blue :++++++-$white########$blue./+++++++++++++.   
+$blue :++++++++/:---:++++++++++++++-     
+$blue  -+++++++++++++++++++++++++:.       
+$blue     :/+++++++++++++++++/:.
+$blue    	 .-:://////::-.  
+$blue        
+$white
+		\n"
+;;
+	([Gg]entoo*)
+printf \
+"
 
+$purple          *......-----*              
+$purple      .--*        **.:::.           		$red $name
+$purple	.-*           ***..-::-.       		$green ################
+$purple   *:.            *.-....--:::.*    		$red Operating System: $white$distro_
+$purple   :.           *:///+o-.---:::-.*  		$red Kernel: $white$kernel_version
+$purple  ./-*         -//::/oy+.---::::-..  		$red Uptime: $white${uptime_:3}
+$purple   :/:-.*       *-////-..--:::::/:*.*		$red Packages: $white $pk_num
+$purple    -//::-**       ***..---::::///. -		$red Shell: $white$shell_
+$purple      *.://-*     ***...---::::/:. ./		$red Resolution: $white$screen_res
+$purple         **      ***...---:::::. *:/.		$red Desktop Environment: $white$de_ $de_ver
+$purple       *        ***...----::-. *:+:* 		$red CPU: $white$cpu_
+$purple     *         ***...-----.* ./+:*   		$red Memory: $white$total_memory
+$purple   **        ****...---.* *:++:*     
+$purple  -       *****....-.* *:+o/-        
+$purple  /  *******.....***./os+:*          
+$purple  /: ***********-/+ss+:*             
+$purple  */o/----://ossso/-*                
+$purple    ./+ssssso/:.*                     
+$white
+  		\n"
+;;
+	(*)
+printf \
+"
 
+$yellow              a8888b.
+$yellow              d888888b.			$red $name
+$yellow              8P'YPY'88			$green ################
+$yellow              8|o||o|88			$red Operating System: $white$distro_
+$yellow              8'    .88			$red Kernel: $white$kernel_version
+$yellow              8*._.' Y8.		$red Uptime: $white${uptime_:3}
+$yellow             d/      *8b.		$red Packages: $white $pk_num
+$yellow            dP   .    Y8b.		$red Shell: $white$shell_
+$yellow           d8:'  '  *::88b		$red Resolution: $white$screen_res
+$yellow          d8'         'Y88b		$red Desktop Environment: $white$de_ $de_ver
+$yellow        :8P    '      :888		$red CPU: $white$cpu_
+$yellow          8a.   :     _a88P		$red Memory: $white$total_memory
+$yellow        ._/'Yaa_:   .| 88P|
+$yellow   jgs  \    YP'    *| 8P  *.
+$yellow   a:f  /     \.___.d|    .'
+$yellow        *--..__)8888P*._.'  
+$white                 
+  		\n"
+;;
 esac
 }
 main
