@@ -4,7 +4,7 @@ green='\033[32m'
 white='\033[37m'
 blue='\033[34m'
 red='\033[31m'
-
+yellow='\033[33m'
 get_name () {
 	name="$(whoami)@$(hostname)"
 }
@@ -81,23 +81,23 @@ get_memory
 
 
 main () {
-		#distro_="arch"
+		distro_="ubuntu"
         case $distro_ in
          ([Dd]ebian*)
 printf \
-"$red           ..          			$blue $name
-$red       ##############    		$green ################
-$red    ####           (###* 		$blue Operating System: $white$distro_
-$red  *##                ##/(		$blue Kernel: $white$kernel_version
-$red ##*       *(    .    ## 		$blue Uptime: $white${uptime_:3}
-$red ##       #           ## 		$blue Packages: $white $pk_num
-$red #        #       .   #. 		$blue Shell: $white$shell_
-$red ##       .#,       ##   		$blue Resolution: $white$screen_res
-$red (#          (,/(*       		$blue Desktop Environment: $white$de_ $de_ver
-$red  ###                    		$blue CPU: $white$cpu_
-$red    ##                   		$blue Memory: $white$total_memory
-$red      ##                 		
-$red         ,#*             
+"$red              ..          				$blue $name
+$red          ##############    			$green ################
+$red       ####           (###* 			$blue Operating System: $white$distro_
+$red     *##                ##/(			$blue Kernel: $white$kernel_version
+$red    ##*       *(    .    ## 			$blue Uptime: $white${uptime_:3}
+$red    ##       #           ## 			$blue Packages: $white $pk_num
+$red    #        #       .   #. 			$blue Shell: $white$shell_
+$red    ##       .#,       ##   			$blue Resolution: $white$screen_res
+$red    (#          (,/(*       			$blue Desktop Environment: $white$de_ $de_ver
+$red     ###                    			$blue CPU: $white$cpu_
+$red       ##                   			$blue Memory: $white$total_memory
+$red         ##                 		
+$red           ,#*             
 $white
 		\n"
 ;;
@@ -118,9 +118,57 @@ $blue    Mmsssssssh      yssssyhdM
 $blue   Mmsssssyhdm      mdhyssssyN
 $blue  Mdsshd                  dhssm
 $blue mdN                         NdN
-
+$white
 		\n"
 ;;
+		([Mm]int*)
+
+
+printf \
+"$green           ////////	
+$green       ////////////////					$red $name
+$green     ////////////////////				$green ################
+$green    /-...-------------://///				$red Operating System: $white$distro_
+$green   //.$white     .            $green:////				$red Kernel: $white$kernel_version
+$green  ///:--$white  -/   ........  $green-////				$red Uptime: $white${uptime_:3}
+$green  /////$white  -/  ::..::..::  $green/////				$red Packages: $white $pk_num
+$green  ///// $white  -/  ::  ::  :/  $green/////				$red Shell: $white$shell_
+$green   /////$white  -/  ::  ::  :/  $green/////				$red Resolution: $white$screen_res
+$green   /////$white  -/         ::   $green/////				$red Desktop Environment: $white$de_ $de_ver
+$green   /////-$white  -:--------::   $green////				$red CPU: $white$cpu_
+$green    /////:$white   ''''''''    $green.//				$red Memory: $white$total_memory
+$green      /////::------------:/
+$green 	 ////////////////
+$green  	     ////////
+$white
+		\n"
+;;
+
+		([Uu]buntu*)
+
+printf \
+"$yellow                          $white hsoosd 			$red $name
+               $yellow  mmddhdmM$white yooooood 			$green ################
+               $yellow soooooooM$white hoooooom 			$red Operating System: $white$distro_
+          $yellow dsyMMNsoooooosm$white dyyyhm 			$red Kernel: $white$kernel_version
+         $yellow msoooyNMNsooooooosyhhyssd 			$red Uptime: $white${uptime_:3}
+        $yellow doooooosNMNddmmdysooooooooh 			$red Packages: $white $pk_num
+        ooooooosm         msoooooood			$red Shell: $white$shell_
+  $red hsssymmooooos$yellow            soooooos			$red Resolution: $white$screen_res
+ $red yoooooomdooood$yellow              mmmmmmm			$red Desktop Environment: $white$de_ $de_ver
+ $red yoooooommooood$yellow              mmmmmmm			$red CPU: $white$cpu_
+  $red hsssymmsoooos$yellow            soooooos			$red Memory: $white$total_memory
+        ooooooosm         msoooooood
+        doooooosNMMdmmmdhsooooooooh 
+         msooosNMNsooooooosyhhyssd 
+           hsyMMNsoooooo$white dyyyhmM 
+                $yellow sooooooo$white hoooooom 
+                 $yellow mddhhhm$white yooooood 
+                          $white hooosd 
+		\n"
+;;
+
+
 
 esac
 }
