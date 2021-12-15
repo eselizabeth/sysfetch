@@ -6,29 +6,68 @@ blue='\033[34m'
 red='\033[31m'
 orange='\033[33m'
 purple='\033[35m'
-yellow='\033[93m'
+yellow='\033[93m' 
+
+
 get_name () {
 	name="$(whoami)@$(hostname)"
-}
+      }
 
 get_distro () {
 	source /etc/*release
 	distro_="$PRETTY_NAME" 
-}
+      }
 
 get_kernel () {
 	kernel_version="$(uname -mr)"
-}
+      }
 get_uptime () {
 	uptime_="$(uptime -p)"
-}
+      }
 
 get_packages () {
-	if [ -x "$(command -v apt-get)" ]
+        pk_num=""
+        # Apt 
+	if [ -x "$(command -v apt-get)" ];
 	then
-		pk_num="$(dpkg-query -f '${binary:Package}\n' -W | wc -l) (dpkg)"
-	fi
-}
+	    pk_num+="$(dpkg-query -f '${binary:Package}\n' -W | wc -l) (dpkg)"
+        fi
+        # Snap 
+        if [ -x "$(command -v snap)" ];
+        then 
+            pk_num+=", $(snap list | wc -l) (snap)"
+        fi
+        # Pacman 
+        if [ -x "$(command -v pacman)" ];
+        then
+          pk_num+=" $(pacman -Q | wc -l)"
+        fi 
+        # Dnf  
+        if [ -x ""$(command -v dnf)"" ];
+        then
+          pk_num+=" $(dnf list installed | wc -l)"
+        fi
+        # Rpm
+        if [ -x ""$(command -v rpm)"" ];
+        then
+          pk_num+=" $(rpm -qa --last | wc -l)"
+        fi
+        # Yum
+        if [ -x ""$(command -v yum)"" ];
+        then
+          pk_num+=" $(yum list installed | wc -l)"
+        fi 
+        # Zypper
+        if [ -x "$(command -v zypper)" ];
+        then 
+          pk_num+=" $(zypper se | wc -l)"
+        fi 
+        # Portage
+        if [ -x "$(command -v emerge)" ];
+        then 
+          pk_num+=" $(equery depends | wc -l)"
+        fi 
+        }
 
 get_shell () {
 	shell_="$(basename $SHELL)"
@@ -47,27 +86,27 @@ get_shell () {
 	elif [ "$shell_" = "fish" ]
 	then
 		shell_="$(fish --version)"
-	fi
-}
+	fi 
+      }
 
 get_resolution () {
 	screen_res="$(xdpyinfo | awk '/dimensions/{print $2}')"
-}
+      }
 
 get_de () {
 	de_="${XDG_CURRENT_DESKTOP} ${DESKTOP_SESSION}"
 	de_ver="$(plasmashell --version | awk '{print $2}')"
-}
+      }
 
 get_cpu () {
 	cpu_="$(cat /proc/cpuinfo | grep 'model name' | head -1 | cut -d':' -f 2 | xargs)"
-}
+      }
 
 get_memory () {
 	used_memory="$(grep -i MemAvailable /proc/meminfo | awk '{print $2}')"
 	total_memory=$(grep -i MemTotal /proc/meminfo | awk '{print $2}')
 	total_memory="$((used_memory/1024)) / $((total_memory/1024)) MiB"
-}
+      }
 
 
 get_name
@@ -83,11 +122,11 @@ get_memory
 
 
 main () {
-		distro_="gentoo"
+    	# distro_="gentoo"
         case $distro_ in
          ([Dd]ebian*)
 printf \
-"$red              ..          				$blue $name
+"$red              ..          			$blue $name
 $red          ##############    			$green ################
 $red       ####           (###* 			$blue Operating System: $white$distro_
 $red     *##                ##/(			$blue Kernel: $white$kernel_version
@@ -264,5 +303,6 @@ $white
   		\n"
 ;;
 esac
-}
+    }
+
 main
