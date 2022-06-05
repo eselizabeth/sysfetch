@@ -6,7 +6,7 @@ blue='\033[34m'
 red='\033[31m'
 orange='\033[33m'
 purple='\033[35m'
-yellow='\033[93m' 
+yellow='\033[93m'
 
 
 get_name () {
@@ -14,9 +14,9 @@ get_name () {
       }
 
 get_distro () {
-	source /etc/*release
-	distro_="$PRETTY_NAME" 
-      }
+	source /etc/os-release
+	distro_="$PRETTY_NAME"
+}
 
 get_kernel () {
 	kernel_version="$(uname -mr)"
@@ -122,7 +122,8 @@ get_memory
 
 
 main () {
-    	# distro_="gentoo"
+
+    	#distro_="manjaro"
         case $distro_ in
          ([Dd]ebian*)
 printf \
