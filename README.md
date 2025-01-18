@@ -7,10 +7,8 @@ apt, snap, packman, dnf, rpm, yum, zypper, portage
 
 ![image](https://i.imgur.com/1UCSObP.png)
 
-To run to script, give the needed permissions
-`chmod u+x ./fetch.sh`
-Move to path(optional)
-`cp fetch.sh /usr/bin`
-`fetch.sh`
-
-
+```sh
+chmod u+x ./fetch.sh
+cp fetch.sh /usr/bin
+fetch.sh
+```
